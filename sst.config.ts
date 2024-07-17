@@ -8,6 +8,21 @@ export default $config({
       home: "aws",
     };
   },
+  console: {
+    autodeploy: {
+      target(event) {
+        if (
+          event.type === "branch" &&
+          event.action === "pushed" &&
+          event.branch === "main"
+        ) {
+          return {
+            stage: "production",
+          };
+        }
+      },
+    },
+  },
   async run() {
     const secrets = {
       GoogleAPIKey: new sst.Secret("GoogleAPIKey"),
