@@ -1,0 +1,7 @@
+{
+  "name": "cron",
+  "dependencies": {
+    "@googleapis/youtube": "^19.0.0",
+    "sst": "ion"
+  }
+}

@@ -9,9 +9,18 @@ export default $config({
     };
   },
   async run() {
+    const secrets = {
+      GoogleAPIKey: new sst.Secret("GoogleAPIKey"),
+    };
     new sst.aws.Cron("Cron", {
-      job: "cron.handler",
-      schedule: "rate(2 minutes)",
+      job: {
+        handler: "cron.handler",
+        link: [secrets.GoogleAPIKey],
+        environment: {
+          CHANNEL_HANDLE: process.env.CHANNEL_HANDLE || "mrbeast6000",
+        },
+      },
+      schedule: "rate(1 minute)",
     });
   },
 });
