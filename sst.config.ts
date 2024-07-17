@@ -8,5 +8,10 @@ export default $config({
       home: "aws",
     };
   },
-  async run() {},
+  async run() {
+    new sst.aws.Cron("Cron", {
+      job: "cron.handler",
+      schedule: "rate(2 minutes)",
+    });
+  },
 });
