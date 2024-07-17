@@ -32,7 +32,7 @@ export default $config({
         handler: "cron.handler",
         link: [secrets.GoogleAPIKey],
         environment: {
-          CHANNEL_HANDLE: process.env.CHANNEL_HANDLE || "pewdiepie",
+          CHANNEL_HANDLE: process.env.CHANNEL_HANDLE || "mrbeast6000",
         },
       },
       schedule: "rate(1 minute)",
