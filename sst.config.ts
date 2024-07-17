@@ -27,16 +27,21 @@ export default $config({
     const secrets = {
       GoogleAPIKey: new sst.Secret("GoogleAPIKey"),
       KnockAPIKey: new sst.Secret("KnockAPIKey"),
+      APNSChannelID: new sst.Secret("APNSChannelID"),
     };
     new sst.aws.Cron("Cron", {
       job: {
         handler: "cron.handler",
-        link: [secrets.GoogleAPIKey, secrets.KnockAPIKey],
+        link: [
+          secrets.GoogleAPIKey,
+          secrets.KnockAPIKey,
+          secrets.APNSChannelID,
+        ],
         environment: {
           CHANNEL_HANDLE: process.env.CHANNEL_HANDLE || "mrbeast",
         },
       },
-      schedule: "rate(1 minute)",
+      schedule: "rate(1 day)",
     });
   },
 });

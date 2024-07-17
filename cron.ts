@@ -6,6 +6,7 @@ const youtubeClient = youtube({
 });
 import { Knock } from "@knocklabs/node";
 const knock = new Knock(Resource.KnockAPIKey.value);
+
 export async function handler() {
   const channel = await youtubeClient.channels.list({
     part: ["statistics"],
@@ -20,7 +21,16 @@ export async function handler() {
         sub_count: stats?.subscriberCount,
       },
       actor: "user-1",
-      recipients: ["user-1"],
+      recipients: [
+        {
+          id: "user-1",
+          channel_data: {
+            APNS_CHANNEL_ID: {
+              tokens: ["apns-push-token"],
+            },
+          },
+        },
+      ],
     });
 
     console.log(res);
