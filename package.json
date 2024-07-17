@@ -2,6 +2,7 @@
   "name": "cron",
   "dependencies": {
     "@googleapis/youtube": "^19.0.0",
+    "@knocklabs/node": "^0.6.13",
     "sst": "ion"
   }
 }

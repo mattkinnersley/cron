@@ -7,6 +7,10 @@ declare module "sst" {
       type: "sst.sst.Secret"
       value: string
     }
+    KnockAPIKey: {
+      type: "sst.sst.Secret"
+      value: string
+    }
   }
 }
 export {}
