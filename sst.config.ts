@@ -26,22 +26,30 @@ export default $config({
   async run() {
     const secrets = {
       GoogleAPIKey: new sst.Secret("GoogleAPIKey"),
-      KnockAPIKey: new sst.Secret("KnockAPIKey"),
-      APNSChannelID: new sst.Secret("APNSChannelID"),
     };
+    const email = new sst.aws.Email("Email", {
+      sender: "noreply@mattkinnersley.com",
+    });
+    const db = new sst.aws.Dynamo("DB", {
+      fields: {
+        pk: "string",
+        sk: "string",
+      },
+      primaryIndex: {
+        hashKey: "pk",
+        rangeKey: "sk",
+      },
+    });
     new sst.aws.Cron("Cron", {
       job: {
         handler: "cron.handler",
-        link: [
-          secrets.GoogleAPIKey,
-          secrets.KnockAPIKey,
-          secrets.APNSChannelID,
-        ],
+        link: [secrets.GoogleAPIKey, email, db],
         environment: {
           CHANNEL_HANDLE: process.env.CHANNEL_HANDLE || "mrbeast",
+          TO_ADDRESS: process.env.TO_ADDRESS || "",
         },
       },
-      schedule: "rate(1 day)",
+      schedule: "rate(1 hour)",
     });
   },
 });

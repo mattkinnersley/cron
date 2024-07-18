@@ -3,11 +3,15 @@
 import "sst"
 declare module "sst" {
   export interface Resource {
-    GoogleAPIKey: {
-      type: "sst.sst.Secret"
-      value: string
+    DB: {
+      name: string
+      type: "sst.aws.Dynamo"
     }
-    KnockAPIKey: {
+    Email: {
+      sender: string
+      type: "sst.aws.Email"
+    }
+    GoogleAPIKey: {
       type: "sst.sst.Secret"
       value: string
     }
