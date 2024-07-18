@@ -49,7 +49,7 @@ export default $config({
           TO_ADDRESS: process.env.TO_ADDRESS || "",
         },
       },
-      schedule: "rate(1 hour)",
+      schedule: "rate(30 minutes)",
     });
   },
 });
